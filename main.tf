@@ -4,6 +4,12 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.1"
     }
+  backend "azurerm" {
+    resource_group_name = "StorageRG"
+    storage_account_name = "taskboardstorage1"
+    container_name = "taskboardcontainer"
+    key = "terraform.tfstate"
+}
   }
 }
 
@@ -76,5 +82,6 @@ resource "azurerm_app_service_source_control" "github" {
   branch                 = "main"
   use_manual_integration = true
 }
+
 
 
