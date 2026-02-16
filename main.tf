@@ -26,6 +26,28 @@ resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_group_name}-${random_integer.ri.result}"
   location = var.resource_group_location
 }
+resource "azurerm_resource_group" "rg2" {
+  name     = "StorageRG"
+  location = var.resource_group_location
+}
+resource "azurerm_recovery_services_vault" "vault" {
+  name                = "example-recovery-vault"
+  location            = azurerm_resource_group.rg2.location
+  resource_group_name = azurerm_resource_group.rg2.name
+  sku                 = "Standard"
+}
+resource "azurerm_storage_account" "taskboardstorage2" {
+  name                     = "examplesa"
+  location                 = azurerm_resource_group.rg2.location
+  resource_group_name      = azurerm_resource_group.rg2.name
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+resource "azurerm_backup_container_storage_account" "taskboardcontainer2" {
+  resource_group_name = azurerm_resource_group.rg2.name
+  recovery_vault_name = azurerm_recovery_services_vault.vault.name
+  storage_account_id  = azurerm_storage_account.taskboardstorage2.id
+}
 
 resource "azurerm_mssql_server" "sql" {
   name                         = "${var.sql_server_name}-${random_integer.ri.result}"
