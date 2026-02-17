@@ -39,8 +39,8 @@ resource "azurerm_mssql_server" "sql" {
 resource "azurerm_mssql_firewall_rule" "fwrule2" {
   name             = var.firewall_rule_name
   server_id        = azurerm_mssql_server.sql.id
-  start_ip_address = "0.0.0.0"
-  end_ip_address   = "0.0.0.0"
+  start_ip_address = "165.225.200.148"
+  end_ip_address   = "165.225.200.148"
 }
 
 resource "azurerm_mssql_database" "sqldb" {
@@ -83,6 +83,7 @@ resource "azurerm_app_service_source_control" "github" {
   branch                 = "main"
   use_manual_integration = true
 }
+
 
 
 
