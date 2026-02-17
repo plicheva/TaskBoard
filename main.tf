@@ -36,7 +36,7 @@ resource "azurerm_mssql_server" "sql" {
   administrator_login          = var.sql_admin_login
   administrator_login_password = var.sql_admin_password
 }
-resource "azurerm_mssql_firewall_rule" "fwrule1" {
+resource "azurerm_mssql_firewall_rule" "fwrule2" {
   name             = var.firewall_rule_name
   server_id        = azurerm_mssql_server.sql.id
   start_ip_address = "0.0.0.0"
@@ -83,6 +83,7 @@ resource "azurerm_app_service_source_control" "github" {
   branch                 = "main"
   use_manual_integration = true
 }
+
 
 
 
