@@ -1,5 +1,7 @@
 Task Board – Terraform Azure Deployment Lab
 
+* This repo needs to be run after Storage
+
 This repository contains a Terraform lab that deploys a complete Azure environment for a Task Board web application using Infrastructure as Code (IaC).
 
 The Terraform configuration (main.tf, variables.tf, and terraform.tfvars) provisions an Azure Resource Group, Azure SQL Server, SQL Database, firewall rule, App Service Plan (Linux F1), and a Linux Web App running .NET 6. A random integer is used to generate unique resource names. The Web App is configured with a connection string to the Azure SQL Database and is integrated with a GitHub repository for source control deployment.
